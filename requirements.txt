@@ -1,7 +1,6 @@
 amqp==5.0.1
 asgiref==3.6.0
 billiard==3.6.3.0
-celery==5.0.0
 click==7.1.2
 click-didyoumean==0.0.3
 click-repl==0.1.6
@@ -11,7 +10,7 @@ django-redis==4.12.1
 djangorestframework==3.14.0
 kombu==5.0.2
 prompt-toolkit==3.0.7
-psycopg2-binary==2.8.5
+psycopg2-binary==2.9.6
 pytz==2020.1
 redis==3.5.3
 six==1.15.0
