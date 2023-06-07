@@ -32,6 +32,12 @@
       build:
         context: .
         dockerfile: Dockerfile-frontend
+      volumes:
+        - ./frontend/src:/frontend/src
+        - ./frontend/index.html:/frontend/index.html
+        - ./frontend/public:/frontend/public
+        - ./frontend/.dockerignore:/frontend/.dockerignore
+        - ./frontend/vite.config.js:/frontend/vite.config.js
       expose: 
         - "3000"
       ports:
@@ -43,6 +49,7 @@
       restart: always
       networks:
         - main
+      command: npm run start
 
     redis:
       restart: always
