@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, Http404, HttpResponseBadRequest
+from django.http import HttpResponseRedirect, Http404, HttpResponseBadRequest, HttpRequest
 from django import db
 from django.contrib.auth.models import User
 
@@ -28,14 +28,13 @@ def get_url(request, shortcode: str):
 
 class GenerateShortUrl(APIView):
 
-    def post(self, request, format=None):
+    def post(self, request: HttpRequest, format=None):
         full_url = request.POST.get('url')
-        print(f'full_url: {full_url}')
         short_url = _create_short_url(full_url)
-
         ShortUrlStats.objects.create(shortcode=short_url)
         return Response({
-            'shortcode': short_url.shortcode
+            'short_url': f'{request.build_absolute_uri(short_url.shortcode)}'.replace('/getshorturl', ''),
+            'full_url': full_url
         })
 
 
