@@ -10,6 +10,7 @@ from .models import ShortUrl
 # Create your views here.
 # https://www.django-rest-framework.org/tutorial/2-requests-and-responses/
 
+
 @api_view(['GET'])
 def get_url(request, shortcode: str):
     """
@@ -19,4 +20,4 @@ def get_url(request, shortcode: str):
         short_url = ShortUrl.objects.get(shortcode=shortcode)
         return HttpResponseRedirect(short_url.full_url)
     except:
-        return Http404("The requested link could not be found.")
+        raise Http404
