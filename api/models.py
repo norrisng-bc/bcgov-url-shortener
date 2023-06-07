@@ -29,4 +29,4 @@ class ShortUrlStats (models.Model):
     objects = models.Manager()
 
     shortcode = models.OneToOneField(ShortUrl, primary_key=True, on_delete=models.CASCADE)
-    times_accessed = models.IntegerField(db_comment="Number of times the URL was accessed.")
+    times_accessed = models.IntegerField(default=0, db_comment="Number of times the URL was accessed.")
