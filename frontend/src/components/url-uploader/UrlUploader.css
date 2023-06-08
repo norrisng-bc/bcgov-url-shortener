@@ -1,0 +1,75 @@
+.url-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  max-width: 795px;
+  margin-left: 100px;
+  margin-right: 100px;
+  width: 100%;
+  background-color: #036;
+  color: #fff;
+  padding: 2rem;
+  font-family: ‘BCSans’, ‘Noto Sans’, Verdana, Arial, sans-serif;
+}
+
+.url-label {
+  font-size: 34px;
+  line-height: 120%;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.text-input {
+  height: 30px;
+  border: 2px solid #606060;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  padding: 5px 5px 5px 7px;
+  font-size: 20px
+}
+
+.text_input[type="text"]:focus {
+  outline: 4px solid #3B99FC;
+  outline-offset: 1px;
+}
+
+.BC-Gov-PrimaryButton-Dark {
+  margin-top: 8px;
+  background-color: #1A5A96;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  padding: 12px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 18px;
+  font-family: ‘BCSans’, ‘Noto Sans’, Verdana, Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.BC-Gov-PrimaryButton-Dark:hover {
+text-decoration: underline;
+background-color: #2170ba
+}
+
+:focus {
+outline: 4px solid #3B99FC;
+outline-offset: 1px;
+}
+
+.BC-Gov-PrimaryButton-Dark:active {
+background-color: #257ed2;
+}
+
+.background-colour {
+background-color: #003366;
+height: 100px;
+width: 300px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
