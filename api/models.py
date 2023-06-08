@@ -29,3 +29,17 @@ class ShortUrlStats (models.Model):
 
     shortcode = models.OneToOneField(ShortUrl, primary_key=True, on_delete=models.CASCADE)
     times_accessed = models.IntegerField(default=0, db_comment="Number of times the URL was accessed.")
+
+
+class ShortUrlView(models.Model):
+    shortcode = models.CharField(max_length=16, primary_key=True)
+    date_created = models.DateTimeField()
+    username = models.TextField()
+    full_url = models.TextField()
+    is_deleted = models.BooleanField()
+    times_accessed = models.IntegerField()
+    expiry_time = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'short_urls_view'
