@@ -1,22 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, Http404, HttpResponseBadRequest
+from django.http import HttpResponseRedirect, Http404, HttpResponseBadRequest, HttpRequest
 from django import db
 from django.contrib.auth.models import User
 
-from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import ShortUrl, ShortUrlStats
-from .serializers import GenerateShortUrlSerializer
 from .shortie_utils import generate_shortcode
 
-# Create your views here.
-# https://www.django-rest-framework.org/tutorial/2-requests-and-responses/
-
-
-NUM_RETRIES = 4
 
 @api_view(['GET'])
 def get_url(request, shortcode: str):
@@ -35,32 +28,14 @@ def get_url(request, shortcode: str):
 
 class GenerateShortUrl(APIView):
 
-    def post(self, request, format=None):
+    def post(self, request: HttpRequest, format=None):
         full_url = request.POST.get('url')
-        print(f'full_url: {full_url}')
         short_url = _create_short_url(full_url)
-
-        # new_shorturlstats = ShortUrlStats(shortcode=shortcode)
-        # new_shorturlstats.save()
         ShortUrlStats.objects.create(shortcode=short_url)
-        return Response({'shortcode': short_url.shortcode})
-
-
-# @api_view(['GET', 'POST'])
-# def generate_short_url(request):
-#     """
-#     Content-Type: application/x-www-form-urlencoded
-#     url: 'http://example.com/urlhere'
-#     """
-#     print('allo!')
-#     if request.method == 'POST':
-#
-#         full_url = request.POST['url']
-#         shortcode = _create_short_url(full_url)
-#
-#         new_shorturlstats = ShortUrlStats(shortcode=shortcode)
-#         new_shorturlstats.save()
-#         return Response({'shortcode': shortcode})
+        return Response({
+            'short_url': f'{request.build_absolute_uri(short_url.shortcode)}'.replace('/getshorturl', ''),
+            'full_url': full_url
+        })
 
 
 def _create_short_url(url: str, max_retry=4):
